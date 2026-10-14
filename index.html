@@ -1,1 +1,313 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dani & Tupozite - Absolute Legends</title>
+    <style>
+        :root {
+            --bg-color: #0f111a;
+            --card-bg: rgba(26, 30, 46, 0.8);
+            --accent-dani: #00f2fe;
+            --accent-tupozite: #4facfe;
+            --highlight: #ff007f;
+            --text-color: #e2e8f0;
+            --subtext: #94a3b8;
+        }
 
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            background-image: 
+                radial-gradient(circle at 15% 20%, rgba(0, 242, 254, 0.15) 0%, transparent 40%),
+                radial-gradient(circle at 85% 80%, rgba(255, 0, 127, 0.15) 0%, transparent 40%);
+            color: var(--text-color);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 2rem;
+            overflow-x: hidden;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 3rem;
+            animation: fadeInDown 1s ease-out;
+        }
+
+        .badge {
+            display: inline-block;
+            background: linear-gradient(135deg, rgba(255,0,127,0.2), rgba(0,242,254,0.2));
+            border: 1px solid rgba(255,255,255,0.1);
+            padding: 0.4rem 1.2rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--accent-dani);
+            margin-bottom: 1rem;
+            backdrop-filter: blur(5px);
+        }
+
+        h1 {
+            font-size: 3rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #fff 0%, #a5b4fc 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 0.5rem;
+        }
+
+        p.subtitle {
+            color: var(--subtext);
+            font-size: 1.1rem;
+        }
+
+        .container {
+            display: flex;
+            gap: 2rem;
+            max-width: 1000px;
+            width: 100%;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .card {
+            background: var(--card-bg);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 20px;
+            padding: 2rem;
+            flex: 1;
+            min-width: 300px;
+            backdrop-filter: blur(12px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+            position: relative;
+            overflow: hidden;
+            transition: transform 0.3s ease, border-color 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-8px);
+        }
+
+        .card.dani {
+            border-top: 4px solid var(--accent-dani);
+        }
+
+        .card.dani:hover {
+            border-color: var(--accent-dani);
+            box-shadow: 0 10px 30px rgba(0, 242, 254, 0.2);
+        }
+
+        .card.tupozite {
+            border-top: 4px solid var(--highlight);
+        }
+
+        .card.tupozite:hover {
+            border-color: var(--highlight);
+            box-shadow: 0 10px 30px rgba(255, 0, 127, 0.2);
+        }
+
+        .avatar-placeholder {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            font-weight: bold;
+            color: #fff;
+        }
+
+        .dani .avatar-placeholder {
+            background: linear-gradient(135deg, #00f2fe, #4facfe);
+            box-shadow: 0 0 20px rgba(0, 242, 254, 0.4);
+        }
+
+        .tupozite .avatar-placeholder {
+            background: linear-gradient(135deg, #ff007f, #7928ca);
+            box-shadow: 0 0 20px rgba(255, 0, 127, 0.4);
+        }
+
+        h2 {
+            font-size: 1.8rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .role {
+            color: var(--subtext);
+            font-size: 0.9rem;
+            margin-bottom: 1.5rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .stats-list {
+            list-style: none;
+            margin-top: 1rem;
+        }
+
+        .stats-list li {
+            padding: 0.75rem 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.95rem;
+        }
+
+        .stats-list li:last-child {
+            border-bottom: none;
+        }
+
+        .stat-label {
+            color: var(--subtext);
+        }
+
+        .stat-value {
+            font-weight: 600;
+            color: #fff;
+        }
+
+        .cool-meter {
+            margin-top: 1.5rem;
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 10px;
+            padding: 0.3rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .meter-bar {
+            height: 12px;
+            border-radius: 8px;
+            width: 100%;
+            animation: pulse 2s infinite alternate;
+        }
+
+        .dani .meter-bar {
+            background: linear-gradient(90deg, #00f2fe, #4facfe);
+        }
+
+        .tupozite .meter-bar {
+            background: linear-gradient(90deg, #ff007f, #7928ca);
+        }
+
+        .footer-banner {
+            margin-top: 3rem;
+            text-align: center;
+            background: rgba(255, 255, 255, 0.03);
+            padding: 1.5rem 3rem;
+            border-radius: 15px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            max-width: 1000px;
+            width: 100%;
+        }
+
+        .footer-banner h3 {
+            margin-bottom: 0.5rem;
+            font-size: 1.2rem;
+            color: #a5b4fc;
+        }
+
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes pulse {
+            0% { filter: brightness(1); }
+            100% { filter: brightness(1.3); }
+        }
+
+        @media (max-width: 680px) {
+            h1 { font-size: 2.2rem; }
+            .container { flex-direction: column; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <span class="badge">Official Appreciation Page</span>
+        <h1>Dani & Tupozite</h1>
+        <p class="subtitle">Certified top-tier friends & undisputed legends.</p>
+    </header>
+
+    <div class="container">
+        <!-- Dani's Card -->
+        <div class="card dani">
+            <div class="avatar-placeholder">D</div>
+            <h2>Dani</h2>
+            <div class="role">Chief Cool Officer</div>
+            <p>Always bringing peak energy, unmatched vibes, and clutch moments whenever needed.</p>
+
+            <ul class="stats-list">
+                <li>
+                    <span class="stat-label">Coolness Level</span>
+                    <span class="stat-value">Over 9000</span>
+                </li>
+                <li>
+                    <span class="stat-label">Vibe Check</span>
+                    <span class="stat-value">Always Passed</span>
+                </li>
+                <li>
+                    <span class="stat-label">Special Skill</span>
+                    <span class="stat-value">Instant Clutch</span>
+                </li>
+            </ul>
+
+            <div class="cool-meter">
+                <div class="meter-bar"></div>
+            </div>
+        </div>
+
+        <!-- Tupozite's Card -->
+        <div class="card tupozite">
+            <div class="avatar-placeholder">T</div>
+            <h2>Tupozite</h2>
+            <div class="role">Legendary Co-Pilot</div>
+            <p>An absolute force of nature. Guarantees top-notch banter, great times, and epic plays.</p>
+
+            <ul class="stats-list">
+                <li>
+                    <span class="stat-label">Coolness Level</span>
+                    <span class="stat-value">Off the Charts</span>
+                </li>
+                <li>
+                    <span class="stat-label">Vibe Check</span>
+                    <span class="stat-value">Flawless</span>
+                </li>
+                <li>
+                    <span class="stat-label">Special Skill</span>
+                    <span class="stat-value">Chaos & Hype</span>
+                </li>
+            </ul>
+
+            <div class="cool-meter">
+                <div class="meter-bar"></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer-banner">
+        <h3>Verdict</h3>
+        <p>Scientific testing confirms: Hanging out with Dani and Tupozite increases happiness by 100%.</p>
+    </div>
+
+</body>
+</html>
